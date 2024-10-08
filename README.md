@@ -1,1 +1,3 @@
 odbpipelineのアウトプットからLLMチャットボットで会話するツール
+設定上の注意
+docker-compose.yaml内の
