@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  data-processor:
+    build: .
+    stdin_open: true
+    tty: true
+    environment:
+      - MECABRC=/usr/local/etc/mecabrc
+    volumes:
+      - .:/work
+      - ./output_chunks:/output_chunks
+      - /Users/sininichimotohashi/.cursor-tutor/projects/odbp-arao/OpenData-Bridge-llm/output_json/service_catalog.json:/output_json/service_catalog.json
+    command: >
+      sh -c "
+        ollama serve &
+        sleep 10 &&
+        ollama pull qwen2.5:3b &&
+        python /work/chunk_sep.py /output_json/service_catalog.json &&
+        python -u /work/chunk_serch.py
+      "
+    
