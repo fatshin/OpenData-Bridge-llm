@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/work
       - ./output_chunks:/output_chunks
-      - /Users/sininichimotohashi/.cursor-tutor/projects/odbp-arao/OpenData-Bridge-llm/output_json/service_catalog.json:/output_json/service_catalog.json
+      - /yourpath/output_json/service_catalog.json:/output_json/service_catalog.json
     command: >
       sh -c "
         ollama serve &
