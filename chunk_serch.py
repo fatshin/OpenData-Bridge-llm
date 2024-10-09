@@ -96,7 +96,7 @@ def chat_with_ollama():
             prompt += "\nこの情報を基に、ユーザーの質問に答えてください。関連するURLは、回答の最後に絶対記載してください。"
             
             print("Ollamaへの問い合わせを開始します。")
-            response = ollama.chat(model='qwen2.5:3b', messages=[
+            response = ollama.chat(model='qwen2.5:1.5b', messages=[
                 {
                     'role': 'user',
                     'content': prompt,
