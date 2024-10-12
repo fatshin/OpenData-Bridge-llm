@@ -12,7 +12,7 @@ services:
     volumes:
       - .:/work
       - ./output_chunks:/output_chunks
-      - ${SERVICE_CATALOG_PATH:-./service_catalog.json}:/output_json/service_catalog.json
+      - ${SERVICE_CATALOG_PATH}:/output_json/service_catalog.json
     command: >
       sh -c "
         ollama serve &
