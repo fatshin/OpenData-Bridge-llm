@@ -16,6 +16,6 @@ services:
         sleep 10 &&
         ollama pull qwen2.5:1.5b &&
         python /work/chunk_sep.py /output_json/service_catalog.json &&
-        python -u /work/chunk_serch.py
+        python -u /work/chunk_serch_webui.py
       "
     
