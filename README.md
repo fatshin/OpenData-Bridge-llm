@@ -12,8 +12,9 @@
 1. このリポジトリをクローンします：
 
    ```
-   git clone https://github.com/your-username/odbpipeline-llm-chatbot.git
-   cd odbpipeline-llm-chatbot
+   git clone https://github.com/fatshin/OpenData-Bridge-llm
+   cd OpenData-Bridge-llm
+
    ```
 
 2. `docker-compose.yaml`ファイル内の以下の行を、あなたの環境に合わせて修正します：
