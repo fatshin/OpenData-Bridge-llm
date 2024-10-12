@@ -172,7 +172,7 @@ def chat():
 <p>追加情報が必要な場合は、お気軽にお問い合わせください。</p>
 """
     
-    response = ollama.chat(model='qwen2.5:3b', messages=[
+    response = ollama.chat(model='qwen2.5-coder:1.5b', messages=[
         {
             'role': 'user',
             'content': prompt,
