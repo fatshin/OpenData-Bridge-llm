@@ -17,7 +17,7 @@ services:
       sh -c "
         ollama serve &
         sleep 10 &&
-        ollama pull ${OLLAMA_MODEL} &&
+        ollama pull qwen2.5-coder:1.5b &&
         python /work/chunk_sep.py /input/service_catalog.json &&
         python -u /work/chunk_serch_webui.py
       "
