@@ -1,31 +1,51 @@
-# Pythonのベースイメージを指定
-FROM python:3.12-slim
+FROM python:3.12
 
-# 作業ディレクトリを設定
-WORKDIR /work
+# 必要なパッケージのインストール
+RUN apt-get update && apt-get install -y \
+    gnupg \
+    dirmngr \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 必要なシステムパッケージをインストール
-RUN apt-get update && \
-    apt-get install -y mecab libmecab-dev mecab-ipadic-utf8 curl build-essential && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
-# MeCabの設定ファイルの確認とリンク作成
-RUN ln -sf /etc/mecabrc /usr/local/etc/mecabrc
 
-# 環境変数を設定
-ENV MECABRC=/usr/local/etc/mecabrc
+# MeCabとその依存関係のインストール
+RUN apt-get update && apt-get install -y \
+    mecab \
+    libmecab-dev \
+    mecab-ipadic-utf8 \
+    git \
+    make \
+    curl \
+    xz-utils \
+    file \
+    sudo \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Ollamaのインストール
-RUN curl https://ollama.ai/install.sh | sh
+# Install Ollama
+RUN curl -fsSL https://ollama.com/install.sh | sh
 
-# 必要なPythonライブラリをインストール
+# Copy MeCab configuration file
+RUN cp /etc/mecabrc /usr/local/etc/
+
+WORKDIR /app
+
+# Copy requirements and install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# スクリプトをコンテナにコピー
-COPY chunk_sep.py .
-COPY chunk_serch.py .
+# Copy the rest of the application
+COPY . .
 
-# コンテナ起動時のコマンドを設定
-CMD ["sh", "-c", "ollama serve & sleep 10 && ollama pull qwen2.5-coder:1.5b && python chunk_sep.py /output_json/service_catalog.json && python -u chunk_serch_webui.py"]
+# Set environment variables
+ENV MECABRC /usr/local/etc/mecabrc
+ENV FLASK_APP chunk_serch_webui.py
+ENV PORT 8080
+ENV OLLAMA_MODEL qwen2.5-coder:1.5b
+
+# Expose the port the app runs on
+EXPOSE 8080
+
+# Run Ollama, pull the model, and start the application
+CMD ollama serve & \
+    ollama pull ${OLLAMA_MODEL} && \
+    python chunk_serch_webui.py
