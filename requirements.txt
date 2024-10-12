@@ -2,3 +2,5 @@ ollama
 openai
 mecab-python3
 Flask
+scikit-learn
+numpy
