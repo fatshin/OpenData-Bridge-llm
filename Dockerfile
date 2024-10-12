@@ -28,4 +28,4 @@ COPY chunk_sep.py .
 COPY chunk_serch.py .
 
 # コンテナ起動時のコマンドを設定
-CMD ["sh", "-c", "ollama serve & sleep 10 && ollama pull qwen2.5:1.5b && python chunk_sep.py /output_json/service_catalog.json && python -u chunk_serch.py"]
+CMD ["sh", "-c", "ollama serve & sleep 10 && ollama pull qwen2.5:1.5b && python chunk_sep.py /output_json/service_catalog.json && python -u chunk_serch_webui.py"]
