@@ -110,4 +110,27 @@
                 },
                 body: 'user_input=' + encodeURIComponent(userInput)
             })
-            .th
+            .then(response => response.json())
+            .then(data => {
+                // ボットの応答を表示
+                var botMessageDiv = document.createElement('div');
+                botMessageDiv.className = 'message bot-message';
+                botMessageDiv.innerHTML = data.response;
+                messagesWrapper.appendChild(botMessageDiv);
+                messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
+            })
+            .catch(error => console.error('Error:', error));
+
+            // 入力フィールドをクリア
+            document.getElementById('user-input').value = '';
+        }
+
+        // Enterキーでメッセージを送信
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
