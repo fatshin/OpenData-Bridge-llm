@@ -3,9 +3,16 @@ import json
 import os
 
 def main(input_file_path):
-    # JSONファイルを読み込む処理
-    with open(input_file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
+    print(f"Attempting to open file: {input_file_path}")
+    try:
+        # JSONファイルを読み込む処理
+        with open(input_file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        print(f"Error: File not found at {input_file_path}")
+        print("Current working directory:", os.getcwd())
+        print("Directory contents:", os.listdir(os.path.dirname(input_file_path)))
+        sys.exit(1)
     
     # 出力ディレクトリを作成
     output_dir = "/output_chunks"
@@ -23,9 +30,7 @@ def save_entry_as_json(entry, output_file_path):
     print(f"Saved: {output_file_path}")
 
 if __name__ == "__main__":
-    # デフォルトのJSONファイルパス
-    default_file_path = os.environ.get('SERVICE_CATALOG_PATH', '/output_json/service_catalog.json')
-    
-    # コマンドライン引数が指定されていればそれを使用
-    input_file_path = sys.argv[1] if len(sys.argv) > 1 else default_file_path
+    # 環境変数からファイルパスを取得
+    input_file_path = os.environ.get('SERVICE_CATALOG_PATH', '/work/output_json/service_catalog.json')
+    print(f"Using input file path: {input_file_path}")
     main(input_file_path)
