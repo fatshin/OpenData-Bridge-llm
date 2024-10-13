@@ -17,4 +17,4 @@ set SERVICE_CATALOG_PATH=!SERVICE_CATALOG_PATH::=!
 set SERVICE_CATALOG_PATH=/!SERVICE_CATALOG_PATH!
 
 REM docker-composeコマンドを実行
-docker-compose up --build
+docker compose up --build
