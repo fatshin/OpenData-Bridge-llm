@@ -24,7 +24,7 @@ def save_entry_as_json(entry, output_file_path):
 
 if __name__ == "__main__":
     # デフォルトのJSONファイルパス
-    default_file_path = "/output_json/service_catalog.json"
+    default_file_path = os.environ.get('SERVICE_CATALOG_PATH', '/output_json/service_catalog.json')
     
     # コマンドライン引数が指定されていればそれを使用
     input_file_path = sys.argv[1] if len(sys.argv) > 1 else default_file_path
