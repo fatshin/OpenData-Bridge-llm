@@ -125,7 +125,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", chat_history=[])
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -157,7 +157,7 @@ def chat():
                 prompt += f"類似度: {similarity:.4f}\n"
                 prompt += f"日付: {date}\n\n"
             prompt += """
-            ユーザーの質問に答える際は、絶対以下のフォーマットに従って回答してください：
+            ユーザーの質問に答える際は、以下のフォーマットに従って回答してください：
 
             1. 回答は簡潔に、かつ構造化してください。
             2. 見出しには<h2></h2>タグを使用し、サブ見出しには<h3></h3>タグを使用してください。
@@ -170,21 +170,6 @@ def chat():
             9. 回答の最後に、『最新の情報については、公式ウェブサイト（<a href="https://www.city.arao.lg.jp/">https://www.city.arao.lg.jp/</a>）をご確認ください。』を必ず入れてください。
             10. 情報の日付が古い場合は、その旨を明記してください。
             11. 日本語で回答してください。
-            例：<h2>イベント情報</h2>
-
-            <h3>1. 夜の万田坑イベント</h3>
-            <ul>
-            <li>名称：<strong>夜の万田坑で小学生対象のイベントを開催します</strong></li>
-            <li>日時：<code>2019年4月18日(土) 18:30-19:30</code></li>
-            <li>対象：小学1年生から6年生</li>
-            <li>定員：約20名</li>
-            <li>参加費：無料</li>
-            </ul>
-
-            <p>詳細は<a href="URL">万田坑夜のイベント詳細</a>をご確認ください。</p>
-
-            <p><strong>注意：この情報は2019年のものです。最新の情報については、公式ウェブサイト（<a href="https://www.city.arao.lg.jp/">https://www.city.arao.lg.jp/</a>）をご確認ください。</strong></p>
-
             """
         
         response = ollama.chat(model='qwen2.5-coder:1.5b', messages=[
