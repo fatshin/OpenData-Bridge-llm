@@ -9,11 +9,11 @@ services:
       - PORT=8080
       - DEBUG=True
       - OLLAMA_MODEL=qwen2.5-coder:1.5b
-      - SERVICE_CATALOG_PATH=${SERVICE_CATALOG_PATH:-/work/output_json/service_catalog.json}
+      - SERVICE_CATALOG_PATH=${DOCKER_SERVICE_CATALOG_PATH:-/work/output_json/service_catalog.json}
     volumes:
       - .:/work
       - ./output_chunks:/output_chunks
-      - ${SERVICE_CATALOG_PATH:-./output_json/service_catalog.json}:/work/output_json/service_catalog.json
+      - ${HOST_SERVICE_CATALOG_PATH:-./output_json/service_catalog.json}:${DOCKER_SERVICE_CATALOG_PATH:-/work/output_json/service_catalog.json}
     command: >
       sh -c "
         ollama serve &
