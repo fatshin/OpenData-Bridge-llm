@@ -16,4 +16,4 @@ fi
 export SERVICE_CATALOG_PATH
 
 # docker-composeコマンドを実行
-docker-compose up --build
+docker compose up --build
