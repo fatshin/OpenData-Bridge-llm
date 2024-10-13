@@ -9,16 +9,17 @@ services:
       - PORT=8080
       - DEBUG=True
       - OLLAMA_MODEL=qwen2.5-coder:1.5b
+      - SERVICE_CATALOG_PATH=${SERVICE_CATALOG_PATH:-/work/output_json/service_catalog.json}
     volumes:
       - .:/work
       - ./output_chunks:/output_chunks
-      - ${SERVICE_CATALOG_PATH}:/output_json/service_catalog.json
+      - ${SERVICE_CATALOG_PATH:-./output_json/service_catalog.json}:/work/output_json/service_catalog.json
     command: >
       sh -c "
         ollama serve &
         sleep 10 &&
         ollama pull qwen2.5-coder:1.5b &&
-        python /work/chunk_sep.py /output_json/service_catalog.json &&
+        python /work/chunk_sep.py &&
         python -u /work/chunk_serch_webui.py
       "
     ports:
