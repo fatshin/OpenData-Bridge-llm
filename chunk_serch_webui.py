@@ -77,7 +77,7 @@ def extract_date(chunk):
             logger.warning(f"Invalid date format: {date_str}")
     return datetime.min
 
-def search_chunks(query, chunks, top_k=3):
+def search_chunks(query, chunks, top_k=2):
     expanded_query = expand_query(query)
     query_nouns = set(extract_nouns(expanded_query))
     
