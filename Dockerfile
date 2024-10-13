@@ -49,3 +49,4 @@ EXPOSE 8080
 CMD ollama serve & \
     ollama pull ${OLLAMA_MODEL} && \
     python chunk_serch_webui.py
+
