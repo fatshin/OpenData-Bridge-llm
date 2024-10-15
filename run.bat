@@ -29,4 +29,4 @@ set "DOCKER_SERVICE_CATALOG_PATH=%DOCKER_SERVICE_CATALOG_PATH%"
 echo Using host path: %HOST_SERVICE_CATALOG_PATH%
 echo Using Docker path: %DOCKER_SERVICE_CATALOG_PATH%
 
-docker-compose up --build
+docker compose up --build
