@@ -40,7 +40,7 @@ COPY . .
 ENV MECABRC /usr/local/etc/mecabrc
 ENV FLASK_APP chunk_serch_webui.py
 ENV PORT 8080
-ENV OLLAMA_MODEL qwen2.5-coder:1.5b
+ENV OLLAMA_MODEL schroneko/gemma-2-2b-jpn-it
 
 # Expose the port the app runs on
 EXPOSE 8080
