@@ -8,7 +8,7 @@ services:
       - MECABRC=/usr/local/etc/mecabrc
       - PORT=8080
       - DEBUG=True
-      - OLLAMA_MODEL=qwen2.5-coder:1.5b
+      - OLLAMA_MODEL=schroneko/gemma-2-2b-jpn-it
       - SERVICE_CATALOG_PATH=${DOCKER_SERVICE_CATALOG_PATH:-/work/output_json/service_catalog.json}
     volumes:
       - .:/work
@@ -18,7 +18,7 @@ services:
       sh -c "
         ollama serve &
         sleep 10 &&
-        ollama pull qwen2.5-coder:1.5b &&
+        ollama pull schroneko/gemma-2-2b-jpn-it &&
         python /work/chunk_sep.py &&
         python -u /work/chunk_serch_webui.py
       "
