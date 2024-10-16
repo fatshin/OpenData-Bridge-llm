@@ -172,7 +172,7 @@ def chat():
             11. 絶対簡体字で回答しないで日本語で回答してください。
             """
         
-        response = ollama.chat(model='qwen2.5-coder:1.5b', messages=[
+        response = ollama.chat(model='schroneko/gemma-2-2b-jpn-it', messages=[
             {
                 'role': 'user',
                 'content': prompt,
